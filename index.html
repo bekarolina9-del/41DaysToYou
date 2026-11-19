@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8e9ee">
+<title>41 день до тебя ❤️</title>
+<style>
+:root{--pink:#d982a2;--rose:#a94f73;--ink:#392b32;--muted:#8a7780;--paper:#fffafb;--line:#f0dce4}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#fff5f7,#f7e8ee 55%,#fffafb);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:760px;margin:auto;padding:22px 16px 56px}.hero{padding:30px 22px;border-radius:28px;background:linear-gradient(135deg,#f5dce5,#fff7f9);text-align:center;border:1px solid #efd3de;box-shadow:0 12px 35px #9e5d7415}
+.eyebrow{letter-spacing:.18em;font-size:11px;color:var(--rose);font-weight:800}.hero h1{font-family:Georgia,serif;font-size:clamp(34px,8vw,54px);line-height:1.05;margin:12px 0;color:#9c496b}.hero p{color:#765d68;margin:8px auto 0;max-width:470px}
+.heart{font-size:32px}.panel{background:#fffdfd;border:1px solid var(--line);border-radius:22px;padding:18px;margin-top:16px;box-shadow:0 8px 24px #9e5d740b}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#fff4f7;border-radius:16px;padding:14px}.stat strong{display:block;color:#b85f82;font-size:27px}.muted,small{color:var(--muted)}.bar{height:9px;border-radius:20px;background:#f4e5eb;overflow:hidden;margin:12px 0}.bar span{display:block;height:100%;background:linear-gradient(90deg,#d982a2,#b85f82);width:0;transition:.2s}
+h2{font-size:19px;margin:0 0 12px}.days{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.day{border:1px solid var(--line);background:white;border-radius:12px;padding:9px 2px;cursor:pointer;color:var(--ink);font-weight:700}.day.active{outline:2px solid var(--pink);background:#fff1f5}.day.done{background:#f9e5ed;color:#a64d70;border-color:#e8bfd0}.day.final{background:#fff5df}
+.tag{display:inline-block;border-radius:30px;background:#f9eaf0;color:#a94f73;padding:4px 10px;font-size:12px;font-weight:700}.tasktitle{font: bold 26px Georgia,serif;margin:12px 0 8px}.taskdesc{font-size:16px}.btn{border:0;border-radius:13px;padding:12px 16px;background:#b85f82;color:white;font-weight:750;cursor:pointer}.btn.secondary{background:#f8e8ee;color:#984967;border:1px solid #edcfdb}.btn:disabled{opacity:.4;cursor:not-allowed}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.actions .btn{flex:1}.checkrow{display:flex;align-items:center;gap:10px;margin-top:15px;padding:12px;background:#fff5f8;border-radius:13px}.checkrow input{width:20px;height:20px;accent-color:#b85f82}
+.secret{background:#fff4e8;border:1px dashed #e6b77e;padding:14px;border-radius:15px;margin-top:12px}.secret strong{color:#9a6431}.bonus{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #f4e8ed}.bonus:last-child{border:0}.bonus input{accent-color:#b85f82;width:19px;height:19px;margin-top:3px}
+textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:13px;padding:12px;font:inherit;resize:vertical;background:#fff}
+.tools{display:flex;gap:9px;flex-wrap:wrap}.tools button{flex:1;min-width:130px}.foot{text-align:center;color:var(--muted);font-size:12px;margin:20px 0}
+@media(max-width:430px){.days{grid-template-columns:repeat(6,1fr)}.panel{padding:15px}.hero{padding:25px 16px}}
+</style></head>
+<body><main>
+<section class="hero"><div class="heart">♡</div><div class="eyebrow">ВАША ЛИЧНАЯ ИСТОРИЯ ОЖИДАНИЯ</div><h1>41 день<br>до тебя</h1><p>Две страны, одна история и 41 маленький шаг навстречу друг другу.</p></section>
+<section class="panel" style="background:#fff5f8;border-color:#edcfdb"><b>Если кнопки не нажимаются на iPhone:</b><br><small>Сначала скачайте этот файл, сохраните его в приложение «Файлы», затем откройте именно в Safari (не во встроенном предпросмотре). В режиме предпросмотра iPhone иногда отключает JavaScript.</small></section>
+<section class="panel">
+<div class="stats"><div class="stat"><small>Выполнено дней</small><strong id="doneCount">0 / 41</strong></div><div class="stat"><small>Ваши баллы</small><strong id="score">0</strong></div></div>
+<div class="bar"><span id="progress"></span></div><small id="progressText">Каждое задание — ещё один шаг к встрече ❤️</small>
+</section>
+<section class="panel"><h2>Календарь заданий</h2><div class="days" id="days"></div></section>
+<section class="panel">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="tag" id="dayTag">ДЕНЬ 1 / 41</span><small>20–30 минут</small></div>
+<div class="tasktitle" id="taskTitle"></div><div class="taskdesc" id="taskDesc"></div>
+<label class="checkrow"><input type="checkbox" id="completed"><span>Мы выполнили задание!</span></label>
+<div class="actions"><button class="btn secondary" id="prev">← Назад</button><button class="btn" id="next">Следующий день →</button></div>
+<button class="btn secondary" style="width:100%;margin-top:10px" id="secretBtn">🔐 Открыть секретную миссию</button>
+<div id="secretBox" class="secret" hidden><strong>СЕКРЕТНАЯ МИССИЯ</strong><p id="secretText" style="margin-bottom:0"></p></div>
+</section>
+<section class="panel"><h2>Бонусные миссии</h2><div id="bonuses"></div><small>Каждая выполненная бонусная миссия приносит 2 балла.</small></section>
+<section class="panel"><h2>Ваши заметки и воспоминания</h2><textarea id="notes" placeholder="Запишите, что сегодня было самым милым или смешным..."></textarea></section>
+<section class="panel"><h2>Перенести прогресс на другой телефон</h2><p class="muted">Эта версия сохраняет данные в браузере на каждом устройстве отдельно. Чтобы передать текущее состояние другому, экспортируйте файл и отправьте его партнёру — он сможет импортировать его у себя.</p><div class="tools"><button class="btn secondary" id="export">Скачать прогресс</button><button class="btn secondary" id="importBtn">Импортировать прогресс</button><input id="importFile" type="file" accept="application/json" hidden></div></section>
+<div class="foot">Сделано с любовью для двух людей, которые очень ждут встречи. ❤️</div>
+</main>
+<script>
+const tasks = [
+["Кто ты сегодня?","Каждый готовит 5 необычных фактов о своём сегодняшнем дне. Второй должен угадать, какие из них правда.","Знакомство"],
+["Один цвет — две страны","Выберите один цвет. Найдите по 5 предметов этого цвета, сфотографируйте и сравните.","Челлендж"],
+["Угадай меня","По очереди задавайте вопросы о привычках, вкусах и желаниях друг друга. По 10 вопросов.","Игра"],
+["Музыкальный телепат","Отправьте по 5 песен, которые, как вам кажется, второй обязательно должен любить.","Музыка"],
+["Свидание вслепую","Один выбирает фильм, второй напитки и еду. Устройте видеосвидание.","Свидание"],
+["Фото из прошлого","Найдите старую фотографию из детства и расскажите историю за ней.","Воспоминания"],
+["Испытание на смех","По очереди отправляйте мемы, смешные видео и шутки. Кто первый рассмеётся, проиграл.","Соревнование"],
+["Нарисуй нас","Нарисуйте вашу пару за 10 минут. Не старайтесь сделать красиво — важен результат.","Творчество"],
+["Правда или действие","Сыграйте 10 раундов. Можно задавать неожиданные, смешные и романтические вопросы.","Игра"],
+["Обмен странами","Покажите друг другу по 5 интересных мест в своих городах, куда хотели бы сходить вместе.","Путешествие"],
+["Угадай желание","Каждый пишет 7 желаний другого. Сравните, сколько совпало.","Игра"],
+["Повторяем образ","Выберите друг другу образ из Pinterest и попробуйте повторить его одеждой или аксессуарами.","Творчество"],
+["Кулинарный баттл","Приготовьте одно и то же простое блюдо и покажите результаты по видеосвязи.","Соревнование"],
+["Наши воспоминания","По очереди расскажите о трёх моментах отношений, которые хочется пережить ещё раз.","Романтика"],
+["10 причин","Напишите друг другу 10 вещей, за которые цените друг друга.","Романтика"],
+["Плейлист любви","Составьте общий плейлист из 10 песен, которые напоминают о вас.","Музыка"],
+["Детектив","Один загадывает предмет в своей комнате, второй задаёт 15 вопросов и пытается угадать.","Игра"],
+["Наш идеальный дом","Найдите фотографии интерьера, который хотели бы иметь вместе.","Мечты"],
+["Письмо из будущего","Напишите письмо от себя через 5 лет. Расскажите, какой видите вашу совместную жизнь.","Письмо"],
+["Ночное свидание","Устройте вечерний видеозвонок, включите музыку и поговорите обо всём.","Свидание"],
+["День без текста","Общайтесь только фотографиями, видео и голосовыми сообщениями.","Челлендж"],
+["Угадай по голосу","Запишите 5 фраз разными эмоциями. Второй должен угадать настроение.","Игра"],
+["Наши секреты","Расскажите по одной истории о себе, которую второй ещё не слышал.","Доверие"],
+["Географический челлендж","Найдите на карте место посередине между вами и придумайте идеальное свидание там.","Путешествие"],
+["Квиз о любви","Подготовьте по 10 вопросов о ваших отношениях. Посчитайте правильные ответы.","Соревнование"],
+["Обмен подарками","Выберите друг другу небольшой подарок, который можно будет вручить при встрече.","Сюрприз"],
+["Танцевальный баттл","Выберите одинаковую песню и снимите по короткому танцевальному видео.","Соревнование"],
+["Наш список безумств","Составьте список из 20 необычных вещей, которые хотите сделать вместе.","Мечты"],
+["Один день глазами другого","Расскажите друг другу, как, по вашему мнению, проходит обычный день партнёра.","Узнать друг друга"],
+["Свидание из воспоминаний","Повторите ваше первое виртуальное или настоящее свидание: музыка, темы и атмосфера.","Свидание"],
+["Секретное интервью","Задайте друг другу по 7 вопросов, на которые обычно не решались.","Доверие"],
+["Путешествие мечты","Каждый планирует поездку для двоих: страна, отель, еда и развлечения.","Путешествие"],
+["Обнимашки на расстоянии","Запишите видео, в котором каждый говорит, как именно хотел бы обнять другого при встрече.","Романтика"],
+["Наши традиции","Придумайте 5 традиций, которые будете соблюдать, когда окажетесь рядом.","Планы"],
+["Комплимент-марафон","По очереди называйте комплименты. Нельзя повторяться.","Романтика"],
+["Секретная посылка","Подготовьте маленький сюрприз и не раскрывайте, что именно это будет.","Сюрприз"],
+["Планы на первые сутки","Составьте подробный план первых 24 часов вместе.","Планы"],
+["Видеописьмо","Запишите видео, которое второй посмотрит непосредственно перед встречей.","Письмо"],
+["Последний большой вечер","Устройте красивое видеосвидание и вспомните всё, что пережили за эти 38 дней.","Свидание"],
+["Тайная подготовка","Подготовьте одежду, письмо, подарок или маленький сюрприз для встречи. Не раскрывайте детали.","Сюрприз"],
+["Последняя ночь ожидания","Скажите друг другу самое важное. Договоритесь, что первым делом сделаете при встрече.","Романтика"],
+["МЫ ВМЕСТЕ!","Найдите друг друга, вручите сюрпризы, прочитайте письма и наконец обнимитесь. Сегодня никаких телефонов и заданий — только вы.","Финал"]
+];
+const secrets=[
+"В течение дня неожиданно отправь фотографию, на которой есть что-то, напоминающее о партнёре.",
+"Спрячь в обычном разговоре фразу «Я уже считаю дни». Посмотри, заметит ли он.",
+"Запиши короткое видео с улыбкой и отправь в неожиданный момент.",
+"Придумай тайное кодовое слово. Когда второй услышит его, он должен сказать что-то приятное.",
+"Подготовь маленькую записку, которую вручишь только при встрече.",
+"Отправь голосовое с описанием ваших будущих объятий.",
+"Устрой неожиданный мини-сюрприз, не объясняя, зачем."
+];
+const bonuses=[["Миссия «Улыбка»","Заставить партнёра искренне рассмеяться."],["Миссия «Телепатия»","Угадать желание партнёра с первой попытки."],["Миссия «Сюрприз»","Неожиданно порадовать партнёра."],["Миссия «Нежность»","Сказать что-то, что партнёр захочет сохранить навсегда."],["Миссия «Детектив»","Угадать, что партнёр задумал для встречи."]];
+let state={day:0,done:[],bonus:[],notes:"",revealed:false};
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem("41days-love-quest",JSON.stringify(state));render()}
+function render(){
+$("days").innerHTML=tasks.map((t,i)=>`<button class="day ${state.day===i?"active":""} ${state.done.includes(i)?"done":""} ${i===40?"final":""}" data-day="${i}" aria-label="День ${i+1}">${state.done.includes(i)?"♥":i===40?"★":i+1}</button>`).join("");
+document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{state.day=+b.dataset.day;state.revealed=false;save()});
+const i=state.day;$("dayTag").textContent=i===40?"ФИНАЛЬНАЯ МИССИЯ":`ДЕНЬ ${i+1} / 41`;$("taskTitle").textContent=tasks[i][0];$("taskDesc").textContent=tasks[i][1];$("completed").checked=state.done.includes(i);
+$("prev").disabled=i===0;$("next").disabled=i===40;$("secretBox").hidden=!state.revealed;$("secretText").textContent=secrets[i%secrets.length];$("secretBtn").textContent=state.revealed?"Скрыть секретную миссию":"🔐 Открыть секретную миссию";
+$("doneCount").textContent=`${state.done.length} / 41`;$("progress").style.width=(state.done.length/41*100)+"%";$("progressText").textContent=state.done.length===41?"Вы прошли весь путь. Время обниматься! ❤️":`Осталось ${41-state.done.length} дней заданий до финала.`;
+const score=state.done.reduce((s,n)=>s+(n===40?5:(n%5===0?2:1)),0)+state.bonus.length*2;$("score").textContent=score;
+$("bonuses").innerHTML=bonuses.map((b,i)=>`<label class="bonus"><input type="checkbox" data-bonus="${i}" ${state.bonus.includes(i)?"checked":""}><span><b>${b[0]}</b><br><small>${b[1]}</small></span></label>`).join("");
+document.querySelectorAll("[data-bonus]").forEach(el=>el.onchange=()=>{const n=+el.dataset.bonus;state.bonus=el.checked?[...state.bonus,n]:state.bonus.filter(x=>x!==n);save()});
+$("notes").value=state.notes;
+}
+$("completed").onchange=e=>{const i=state.day;state.done=e.target.checked?[...new Set([...state.done,i])]:state.done.filter(n=>n!==i);save()};
+$("prev").onclick=()=>{state.day--;state.revealed=false;save()};$("next").onclick=()=>{state.day++;state.revealed=false;save()};
+$("secretBtn").onclick=()=>{state.revealed=!state.revealed;render()};
+$("notes").oninput=e=>{state.notes=e.target.value;localStorage.setItem("41days-love-quest",JSON.stringify(state))};
+$("export").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="наш-прогресс-41-день.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)};
+$("importBtn").onclick=()=>$("importFile").click();
+$("importFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text());if(!Array.isArray(x.done)||!Array.isArray(x.bonus))throw Error();state={day:Math.min(40,Math.max(0,x.day||0)),done:x.done.filter(n=>Number.isInteger(n)&&n>=0&&n<41),bonus:x.bonus.filter(n=>Number.isInteger(n)&&n>=0&&n<5),notes:String(x.notes||""),revealed:false};save();alert("Прогресс импортирован ❤️")}catch{alert("Не удалось прочитать файл прогресса.")}e.target.value=""};
+try{const old=JSON.parse(localStorage.getItem("41days-love-quest")||"null");if(old)state={...state,...old}}catch{}render();
+</script></body></html>
